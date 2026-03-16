@@ -1,0 +1,16 @@
+export const C = {
+  orange: '#e8842c',
+  orangeLight: '#f4a261',
+  navy: '#1e2d3d',
+  navyLight: '#2a3f52',
+  cream: '#faf8f5',
+  lightOrange: '#fdf0e4',
+  white: '#ffffff',
+  text: '#374151',
+  textLight: '#6b7280',
+  border: 'rgba(30,45,61,0.08)',
+  green: '#16a34a',
+  greenLight: '#dcfce7',
+  red: '#dc2626',
+  redLight: '#fef2f2',
+} as const;
