@@ -7,6 +7,7 @@ import { C } from './lib/constants';
 import { SCENARIOS, CATEGORIES } from './lib/scenarios';
 import ScenarioCard from './ScenarioCard';
 import ScenarioDetail from './ScenarioDetail';
+import LeadModal from './LeadModal';
 import type { Scenario } from './lib/scenarios';
 
 const theme = createTheme({
@@ -18,12 +19,13 @@ const theme = createTheme({
   typography: {
     fontFamily: '"Inter", "Helvetica Neue", Arial, sans-serif',
   },
-  shape: { borderRadius: 12 },
+  shape: { borderRadius: 14 },
 });
 
 export default function App() {
   const [filter, setFilter] = useState('all');
   const [selected, setSelected] = useState<Scenario | null>(null);
+  const [leadModalOpen, setLeadModalOpen] = useState(false);
 
   const filtered = filter === 'all'
     ? SCENARIOS
@@ -33,7 +35,17 @@ export default function App() {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ScenarioDetail scenario={selected} onBack={() => setSelected(null)} />
+        <ScenarioDetail
+          scenario={selected}
+          onBack={() => setSelected(null)}
+          onContact={() => setLeadModalOpen(true)}
+        />
+        <LeadModal
+          open={leadModalOpen}
+          onClose={() => setLeadModalOpen(false)}
+          scenarioId={selected.id}
+          scenarioTitre={selected.title}
+        />
       </ThemeProvider>
     );
   }
@@ -41,6 +53,10 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <LeadModal
+        open={leadModalOpen}
+        onClose={() => setLeadModalOpen(false)}
+      />
       <Box sx={{ minHeight: '100vh', bgcolor: C.cream }}>
         {/* Hero */}
         <Box sx={{
@@ -193,14 +209,13 @@ export default function App() {
               pour evaluer le vrai cout du risque et la valeur d'un accompagnement.
             </Typography>
             <Box
-              component="a"
-              href="mailto:s.coly@dairia-avocats.com?subject=Demande%20d%27%C3%A9valuation%20ROI"
+              component="button"
+              onClick={() => setLeadModalOpen(true)}
               sx={{
                 display: 'inline-flex', px: 5, py: 2,
-                borderRadius: 3,
+                borderRadius: '14px', border: 'none', cursor: 'pointer',
                 background: `linear-gradient(135deg, ${C.orange}, ${C.orangeLight})`,
                 color: '#fff', fontWeight: 700, fontSize: 16,
-                textDecoration: 'none',
                 boxShadow: '0 6px 24px rgba(232,132,44,0.4)',
                 transition: 'all 0.2s',
                 '&:hover': {

@@ -14,9 +14,10 @@ function formatEur(n: number): string {
 interface Props {
   scenario: Scenario;
   onBack: () => void;
+  onContact?: () => void;
 }
 
-export default function ScenarioDetail({ scenario, onBack }: Props) {
+export default function ScenarioDetail({ scenario, onBack, onContact }: Props) {
   const { title, subtitle, situation, risqueSansAvocat, missionDairia, valeurCreee } = scenario;
 
   const maxRisk = risqueSansAvocat.montantMax;
@@ -273,14 +274,13 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
             Chaque dossier est unique. Contactez-nous pour une evaluation sur mesure.
           </Typography>
           <Box
-            component="a"
-            href="mailto:s.coly@dairia-avocats.com?subject=Demande%20d%27%C3%A9valuation%20ROI"
+            component="button"
+            onClick={onContact}
             sx={{
               display: 'inline-flex', px: 4, py: 1.5,
-              borderRadius: 3,
+              borderRadius: '14px', border: 'none', cursor: 'pointer',
               background: `linear-gradient(135deg, ${C.orange}, ${C.orangeLight})`,
               color: '#fff', fontWeight: 700, fontSize: 15,
-              textDecoration: 'none',
               boxShadow: '0 6px 24px rgba(232,132,44,0.3)',
               transition: 'all 0.2s',
               '&:hover': {
@@ -289,7 +289,7 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
               },
             }}
           >
-            Evaluer mon risque
+            Évaluer mon risque →
           </Box>
         </Box>
       </Container>
