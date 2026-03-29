@@ -30,12 +30,12 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
       <Box sx={{
         background: `linear-gradient(135deg, ${C.navy} 0%, ${C.navyLight} 100%)`,
         color: '#fff',
-        pt: { xs: 3, md: 5 }, pb: { xs: 5, md: 8 },
+        pt: { xs: 3, md: 5 }, pb: { xs: 6, md: 9 },
         position: 'relative', overflow: 'hidden',
       }}>
         <Box sx={{
           position: 'absolute', top: -80, right: -80, width: 300, height: 300,
-          borderRadius: '50%', border: '1px solid rgba(232,132,44,0.1)',
+          borderRadius: '50%', border: '1px solid rgba(232,132,44,0.12)',
         }} />
         <Box sx={{
           position: 'absolute', inset: 0, opacity: 0.02,
@@ -45,21 +45,21 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
 
         <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
           <IconButton onClick={onBack} sx={{
-            color: 'rgba(255,255,255,0.6)', mb: 3,
+            color: 'rgba(255,255,255,0.65)', mb: 3,
             '&:hover': { color: '#fff', bgcolor: 'rgba(255,255,255,0.1)' },
           }}>
             <ArrowBackIcon />
           </IconButton>
 
           <Typography sx={{
-            fontSize: 11, fontWeight: 700, color: C.orange,
-            letterSpacing: 2.5, textTransform: 'uppercase', mb: 1,
+            fontSize: 12, fontWeight: 700, color: C.orange,
+            letterSpacing: 2.5, textTransform: 'uppercase', mb: 1.5,
           }}>
             {subtitle}
           </Typography>
           <Typography sx={{
-            fontSize: { xs: 26, md: 36 }, fontWeight: 900, lineHeight: 1.2,
-            letterSpacing: '-0.02em', mb: 3, maxWidth: 600,
+            fontSize: { xs: 28, sm: 34, md: 40 }, fontWeight: 900, lineHeight: 1.18,
+            letterSpacing: '-0.02em', mb: 3, maxWidth: 620,
           }}>
             {title}
           </Typography>
@@ -76,16 +76,16 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
           p: { xs: 3, md: 4 }, mb: 4,
           borderLeft: `4px solid ${C.orange}`,
           bgcolor: C.lightOrange,
-          borderRadius: '0 16px 16px 0',
+          borderRadius: '0 14px 14px 0',
         }}>
           <Typography sx={{
-            fontSize: 11, fontWeight: 700, color: C.orange,
+            fontSize: 12, fontWeight: 700, color: C.orange,
             letterSpacing: 2, textTransform: 'uppercase', mb: 1.5,
           }}>
             La situation
           </Typography>
           <Typography sx={{
-            fontSize: 16, lineHeight: 1.9, color: C.text,
+            fontSize: { xs: 15, md: 16 }, lineHeight: 1.85, color: C.navy,
           }}>
             {situation}
           </Typography>
@@ -93,11 +93,13 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
 
         {/* Visual comparison */}
         <Paper elevation={0} sx={{
-          p: { xs: 3, md: 5 }, mb: 4, borderRadius: 4,
-          border: `1px solid ${C.border}`,
+          p: { xs: 3, md: 5 }, mb: 4, borderRadius: '14px',
+          bgcolor: C.white,
+          border: `1.5px solid ${C.border}`,
+          boxShadow: '0 2px 12px rgba(30,45,61,0.06)',
         }}>
           <Typography sx={{
-            fontSize: 11, fontWeight: 700, color: C.navy,
+            fontSize: 12, fontWeight: 700, color: C.navy,
             letterSpacing: 2, textTransform: 'uppercase', mb: 4,
           }}>
             Comparaison visuelle
@@ -105,11 +107,11 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
 
           {/* Risk bar */}
           <Box sx={{ mb: 4 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-              <Typography sx={{ fontSize: 14, fontWeight: 700, color: C.red }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5, flexWrap: 'wrap', gap: 1 }}>
+              <Typography sx={{ fontSize: 15, fontWeight: 700, color: C.red }}>
                 Risque sans accompagnement
               </Typography>
-              <Typography sx={{ fontSize: 14, fontWeight: 800, color: C.red }}>
+              <Typography sx={{ fontSize: 15, fontWeight: 800, color: C.red }}>
                 {formatEur(risqueSansAvocat.montantMin)} - {formatEur(maxRisk)}
               </Typography>
             </Box>
@@ -117,11 +119,11 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
               variant="determinate"
               value={riskBarPercent}
               sx={{
-                height: 16, borderRadius: 2,
+                height: 14, borderRadius: '7px',
                 bgcolor: 'rgba(220,38,38,0.1)',
                 '& .MuiLinearProgress-bar': {
                   bgcolor: C.red,
-                  borderRadius: 2,
+                  borderRadius: '7px',
                 },
               }}
             />
@@ -129,11 +131,11 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
 
           {/* Cost bar */}
           <Box sx={{ mb: 4 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-              <Typography sx={{ fontSize: 14, fontWeight: 700, color: C.green }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5, flexWrap: 'wrap', gap: 1 }}>
+              <Typography sx={{ fontSize: 15, fontWeight: 700, color: C.green }}>
                 Mission DAIRIA
               </Typography>
-              <Typography sx={{ fontSize: 14, fontWeight: 800, color: C.green }}>
+              <Typography sx={{ fontSize: 15, fontWeight: 800, color: C.green }}>
                 {formatEur(honoraires)}
               </Typography>
             </Box>
@@ -141,11 +143,11 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
               variant="determinate"
               value={costBarPercent}
               sx={{
-                height: 16, borderRadius: 2,
+                height: 14, borderRadius: '7px',
                 bgcolor: 'rgba(22,163,74,0.1)',
                 '& .MuiLinearProgress-bar': {
                   bgcolor: C.green,
-                  borderRadius: 2,
+                  borderRadius: '7px',
                 },
               }}
             />
@@ -153,20 +155,20 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
 
           {/* Ratio highlight */}
           <Box sx={{
-            textAlign: 'center', p: 4, mt: 2,
+            textAlign: 'center', p: { xs: 3, md: 5 }, mt: 2,
             background: `linear-gradient(135deg, ${C.navy} 0%, ${C.navyLight} 100%)`,
-            borderRadius: 4,
+            borderRadius: '14px',
           }}>
             <Typography sx={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', fontWeight: 700, letterSpacing: 2, mb: 1 }}>
               RATIO VALEUR / COUT
             </Typography>
             <Typography sx={{
-              fontSize: { xs: 48, md: 64 }, fontWeight: 900, color: C.orange,
+              fontSize: { xs: 52, md: 72 }, fontWeight: 900, color: C.orange,
               letterSpacing: '-0.03em', lineHeight: 1,
             }}>
               x{valeurCreee.ratio}
             </Typography>
-            <Typography sx={{ fontSize: 15, color: 'rgba(255,255,255,0.4)', mt: 1 }}>
+            <Typography sx={{ fontSize: { xs: 14, md: 16 }, color: 'rgba(255,255,255,0.45)', mt: 1.5 }}>
               Pour 1 EUR investi, {valeurCreee.ratio} EUR de risque securises
             </Typography>
           </Box>
@@ -180,9 +182,10 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
         }}>
           {/* Risk details */}
           <Paper elevation={0} sx={{
-            p: { xs: 3, md: 4 }, borderRadius: 4,
-            border: `1px solid rgba(220,38,38,0.15)`,
-            bgcolor: C.redLight,
+            p: { xs: 3, md: 4 }, borderRadius: '14px',
+            bgcolor: C.white,
+            border: `1.5px solid rgba(220,38,38,0.15)`,
+            boxShadow: '0 2px 8px rgba(220,38,38,0.06)',
           }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
               <WarningAmberIcon sx={{ color: C.red, fontSize: 28 }} />
@@ -194,9 +197,9 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
               <Box key={i} sx={{ display: 'flex', gap: 1.5, mb: 2 }}>
                 <Box sx={{
                   width: 6, height: 6, borderRadius: '50%', bgcolor: C.red,
-                  flexShrink: 0, mt: '8px', opacity: 0.6,
+                  flexShrink: 0, mt: '9px', opacity: 0.7,
                 }} />
-                <Typography sx={{ fontSize: 14, color: '#7f1d1d', lineHeight: 1.7 }}>
+                <Typography sx={{ fontSize: 15, color: '#7f1d1d', lineHeight: 1.75 }}>
                   {d}
                 </Typography>
               </Box>
@@ -205,9 +208,10 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
 
           {/* Mission details */}
           <Paper elevation={0} sx={{
-            p: { xs: 3, md: 4 }, borderRadius: 4,
-            border: `1px solid rgba(22,163,74,0.15)`,
-            bgcolor: C.greenLight,
+            p: { xs: 3, md: 4 }, borderRadius: '14px',
+            bgcolor: C.white,
+            border: `1.5px solid rgba(22,163,74,0.15)`,
+            boxShadow: '0 2px 8px rgba(22,163,74,0.06)',
           }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
               <ShieldIcon sx={{ color: C.green, fontSize: 28 }} />
@@ -215,7 +219,7 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
                 <Typography sx={{ fontSize: 16, fontWeight: 800, color: C.green }}>
                   {missionDairia.label}
                 </Typography>
-                <Typography sx={{ fontSize: 12, color: '#166534' }}>
+                <Typography sx={{ fontSize: 13, color: '#166534', fontWeight: 600 }}>
                   {scenario.category === 'abonnement'
                     ? `${formatEur(honoraires)} HT / an`
                     : `${missionDairia.dureeJours} jours — ${formatEur(honoraires)} HT`
@@ -227,9 +231,9 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
               <Box key={i} sx={{ display: 'flex', gap: 1.5, mb: 2 }}>
                 <Box sx={{
                   width: 6, height: 6, borderRadius: '50%', bgcolor: C.green,
-                  flexShrink: 0, mt: '8px', opacity: 0.6,
+                  flexShrink: 0, mt: '9px', opacity: 0.7,
                 }} />
-                <Typography sx={{ fontSize: 14, color: '#14532d', lineHeight: 1.7 }}>
+                <Typography sx={{ fontSize: 15, color: '#14532d', lineHeight: 1.75 }}>
                   {d}
                 </Typography>
               </Box>
@@ -239,21 +243,24 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
 
         {/* Value created */}
         <Paper elevation={0} sx={{
-          p: { xs: 3, md: 4 }, borderRadius: 4,
-          border: `1px solid ${C.border}`, mb: 4,
+          p: { xs: 3, md: 4 }, borderRadius: '14px',
+          bgcolor: C.white,
+          border: `1.5px solid ${C.border}`,
+          boxShadow: '0 2px 8px rgba(30,45,61,0.06)',
+          mb: 4,
         }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
             <TrendingUpIcon sx={{ color: C.orange, fontSize: 28 }} />
-            <Typography sx={{ fontSize: 16, fontWeight: 800, color: C.navy }}>
+            <Typography sx={{ fontSize: 17, fontWeight: 800, color: C.navy }}>
               Valeur creee par l'accompagnement
             </Typography>
           </Box>
           {valeurCreee.pointsCles.map((p, i) => (
             <Box key={i} sx={{ display: 'flex', gap: 1.5, mb: 2 }}>
               <CheckCircleIcon sx={{
-                color: C.green, fontSize: 20, flexShrink: 0, mt: '2px',
+                color: C.green, fontSize: 20, flexShrink: 0, mt: '3px',
               }} />
-              <Typography sx={{ fontSize: 15, color: C.text, lineHeight: 1.7 }}>
+              <Typography sx={{ fontSize: 15, color: C.navy, lineHeight: 1.75 }}>
                 {p}
               </Typography>
             </Box>
@@ -263,12 +270,12 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
         {/* CTA */}
         <Box sx={{ textAlign: 'center', py: 4 }}>
           <Typography sx={{
-            fontSize: 20, fontWeight: 800, color: C.navy, mb: 1.5,
+            fontSize: { xs: 21, md: 24 }, fontWeight: 800, color: C.navy, mb: 1.5,
           }}>
             Cette situation vous parle ?
           </Typography>
           <Typography sx={{
-            fontSize: 15, color: C.textLight, mb: 3, lineHeight: 1.7,
+            fontSize: { xs: 15, md: 16 }, color: C.textLight, mb: 3.5, lineHeight: 1.8,
           }}>
             Chaque dossier est unique. Contactez-nous pour une evaluation sur mesure.
           </Typography>
@@ -276,16 +283,16 @@ export default function ScenarioDetail({ scenario, onBack }: Props) {
             component="a"
             href="mailto:s.coly@dairia-avocats.com?subject=Demande%20d%27%C3%A9valuation%20ROI"
             sx={{
-              display: 'inline-flex', px: 4, py: 1.5,
-              borderRadius: 3,
+              display: 'inline-flex', px: 5, py: 2,
+              borderRadius: '12px',
               background: `linear-gradient(135deg, ${C.orange}, ${C.orangeLight})`,
-              color: '#fff', fontWeight: 700, fontSize: 15,
+              color: '#fff', fontWeight: 700, fontSize: 16,
               textDecoration: 'none',
-              boxShadow: '0 6px 24px rgba(232,132,44,0.3)',
+              boxShadow: '0 6px 24px rgba(232,132,44,0.35)',
               transition: 'all 0.2s',
               '&:hover': {
                 transform: 'translateY(-2px)',
-                boxShadow: '0 8px 32px rgba(232,132,44,0.5)',
+                boxShadow: '0 10px 36px rgba(232,132,44,0.5)',
               },
             }}
           >

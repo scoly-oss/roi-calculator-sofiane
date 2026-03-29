@@ -13,12 +13,27 @@ const theme = createTheme({
   palette: {
     primary: { main: C.orange },
     secondary: { main: C.navy },
-    background: { default: C.cream },
+    background: { default: C.cream, paper: C.white },
+    text: { primary: C.navy, secondary: C.textLight },
   },
   typography: {
     fontFamily: '"Inter", "Helvetica Neue", Arial, sans-serif',
+    body1: { fontSize: 16, lineHeight: 1.75 },
+    body2: { fontSize: 14, lineHeight: 1.7 },
   },
-  shape: { borderRadius: 12 },
+  shape: { borderRadius: 14 },
+  components: {
+    MuiChip: {
+      styleOverrides: {
+        root: { fontFamily: '"Inter", "Helvetica Neue", Arial, sans-serif' },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: { backgroundImage: 'none' },
+      },
+    },
+  },
 });
 
 export default function App() {
@@ -65,21 +80,21 @@ export default function App() {
 
           <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
             <Typography sx={{
-              color: C.orange, fontWeight: 800, letterSpacing: 6, fontSize: 12, mb: 4,
+              color: C.orange, fontWeight: 800, letterSpacing: 6, fontSize: 13, mb: 4,
             }}>
               SOFIANE COLY — CALCULATEUR ROI
             </Typography>
 
             <Typography sx={{
-              fontSize: { xs: 28, md: 42 }, fontWeight: 900, lineHeight: 1.15,
-              letterSpacing: '-0.025em', mb: 2, maxWidth: 700,
+              fontSize: { xs: 30, sm: 38, md: 46 }, fontWeight: 900, lineHeight: 1.12,
+              letterSpacing: '-0.025em', mb: 2.5, maxWidth: 700,
             }}>
               Combien vous coute de ne pas etre accompagne ?
             </Typography>
 
             <Typography sx={{
-              fontSize: { xs: 16, md: 19 }, color: 'rgba(255,255,255,0.6)',
-              lineHeight: 1.7, maxWidth: 600, mb: 1,
+              fontSize: { xs: 17, md: 20 }, color: 'rgba(255,255,255,0.65)',
+              lineHeight: 1.75, maxWidth: 620, mb: 1,
             }}>
               16 cas concrets. Comparez le risque financier sans accompagnement
               et la valeur creee par DAIRIA Avocats, DAIRIA IA a 90 EUR/mois et GererMesATMP.
@@ -111,12 +126,12 @@ export default function App() {
               ].map((stat, i) => (
                 <Box key={i} sx={{ textAlign: 'center' }}>
                   <Typography sx={{
-                    fontSize: { xs: 28, md: 36 }, fontWeight: 900, color: C.orange,
+                    fontSize: { xs: 30, md: 40 }, fontWeight: 900, color: C.orange,
                     letterSpacing: '-0.02em',
                   }}>
                     {stat.value}
                   </Typography>
-                  <Typography sx={{ fontSize: 13, color: C.textLight, fontWeight: 600 }}>
+                  <Typography sx={{ fontSize: 14, color: C.textLight, fontWeight: 600 }}>
                     {stat.label}
                   </Typography>
                 </Box>
@@ -137,13 +152,15 @@ export default function App() {
                 label={cat.label}
                 onClick={() => setFilter(cat.id)}
                 sx={{
-                  px: 1, py: 2.5, fontSize: 14, fontWeight: 600,
-                  borderRadius: 3,
-                  bgcolor: filter === cat.id ? C.navy : '#fff',
-                  color: filter === cat.id ? '#fff' : C.text,
-                  border: `1px solid ${filter === cat.id ? C.navy : C.border}`,
+                  px: 2, py: 2.5, fontSize: 14, fontWeight: 600,
+                  borderRadius: '10px',
+                  bgcolor: filter === cat.id ? C.navy : C.white,
+                  color: filter === cat.id ? '#fff' : C.navy,
+                  border: `1.5px solid ${filter === cat.id ? C.navy : C.border}`,
+                  boxShadow: filter === cat.id ? '0 2px 8px rgba(30,45,61,0.18)' : '0 1px 3px rgba(30,45,61,0.06)',
                   '&:hover': {
                     bgcolor: filter === cat.id ? C.navyLight : C.lightOrange,
+                    borderColor: filter === cat.id ? C.navyLight : C.orange,
                   },
                   transition: 'all 0.2s',
                 }}
@@ -181,13 +198,13 @@ export default function App() {
           }} />
           <Container maxWidth="sm" sx={{ position: 'relative', zIndex: 1 }}>
             <Typography sx={{
-              fontSize: { xs: 24, md: 32 }, fontWeight: 800, color: '#fff',
+              fontSize: { xs: 26, md: 34 }, fontWeight: 800, color: '#fff',
               mb: 2, letterSpacing: '-0.01em',
             }}>
               Et votre situation ?
             </Typography>
             <Typography sx={{
-              color: 'rgba(255,255,255,0.5)', fontSize: 16, mb: 4, lineHeight: 1.8,
+              color: 'rgba(255,255,255,0.6)', fontSize: { xs: 16, md: 17 }, mb: 4, lineHeight: 1.85,
             }}>
               Chaque dossier est unique. Parlons de votre situation
               pour evaluer le vrai cout du risque et la valeur d'un accompagnement.
