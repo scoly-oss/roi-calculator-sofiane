@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   ThemeProvider, createTheme, CssBaseline, Box, Typography,
   Chip, Container,
@@ -7,6 +7,8 @@ import { C } from './lib/constants';
 import { SCENARIOS, CATEGORIES } from './lib/scenarios';
 import ScenarioCard from './ScenarioCard';
 import ScenarioDetail from './ScenarioDetail';
+import LeadForm from './LeadForm';
+import SalesDashboard from './SalesDashboard';
 import type { Scenario } from './lib/scenarios';
 
 const theme = createTheme({
@@ -21,19 +23,53 @@ const theme = createTheme({
   shape: { borderRadius: 12 },
 });
 
+function useHashRoute() {
+  const [hash, setHash] = useState(window.location.hash);
+  useEffect(() => {
+    const handler = () => setHash(window.location.hash);
+    window.addEventListener('hashchange', handler);
+    return () => window.removeEventListener('hashchange', handler);
+  }, []);
+  return hash;
+}
+
 export default function App() {
   const [filter, setFilter] = useState('all');
   const [selected, setSelected] = useState<Scenario | null>(null);
+  const [leadFormOpen, setLeadFormOpen] = useState(false);
+  const [leadScenario, setLeadScenario] = useState<Scenario | null>(null);
+
+  const hash = useHashRoute();
+  const isSales = hash === '#/sales';
+
+  function openLeadForm(scenario?: Scenario | null) {
+    setLeadScenario(scenario ?? null);
+    setLeadFormOpen(true);
+  }
 
   const filtered = filter === 'all'
     ? SCENARIOS
     : SCENARIOS.filter(s => s.category === filter);
 
+  if (isSales) {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <SalesDashboard onBack={() => { window.location.hash = ''; }} />
+      </ThemeProvider>
+    );
+  }
+
   if (selected) {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ScenarioDetail scenario={selected} onBack={() => setSelected(null)} />
+        <ScenarioDetail
+          scenario={selected}
+          onBack={() => setSelected(null)}
+          onContact={() => openLeadForm(selected)}
+        />
+        <LeadForm open={leadFormOpen} onClose={() => setLeadFormOpen(false)} scenario={leadScenario} />
       </ThemeProvider>
     );
   }
@@ -193,14 +229,14 @@ export default function App() {
               pour evaluer le vrai cout du risque et la valeur d'un accompagnement.
             </Typography>
             <Box
-              component="a"
-              href="mailto:s.coly@dairia-avocats.com?subject=Demande%20d%27%C3%A9valuation%20ROI"
+              component="button"
+              onClick={() => openLeadForm(null)}
               sx={{
                 display: 'inline-flex', px: 5, py: 2,
                 borderRadius: 3,
                 background: `linear-gradient(135deg, ${C.orange}, ${C.orangeLight})`,
                 color: '#fff', fontWeight: 700, fontSize: 16,
-                textDecoration: 'none',
+                border: 'none', cursor: 'pointer',
                 boxShadow: '0 6px 24px rgba(232,132,44,0.4)',
                 transition: 'all 0.2s',
                 '&:hover': {
@@ -249,6 +285,8 @@ export default function App() {
           </Container>
         </Box>
       </Box>
+
+      <LeadForm open={leadFormOpen} onClose={() => setLeadFormOpen(false)} scenario={leadScenario} />
     </ThemeProvider>
   );
 }
