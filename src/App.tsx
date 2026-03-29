@@ -213,19 +213,19 @@ export default function App() {
             </Box>
 
             <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap', mt: 3 }}>
-              <Box component="a" href="https://dairia.ai" target="_blank" rel="noopener"
+              <Box component="a" href="https://dairia.ai" target="_blank" rel="noopener noreferrer"
                 sx={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, textDecoration: 'none', '&:hover': { color: C.orange } }}>
                 dairia.ai
               </Box>
-              <Box component="a" href="https://gerer-mes-atmp.vercel.app" target="_blank" rel="noopener"
+              <Box component="a" href="https://gerer-mes-atmp.vercel.app" target="_blank" rel="noopener noreferrer"
                 sx={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, textDecoration: 'none', '&:hover': { color: C.orange } }}>
                 gerermesatmp.com
               </Box>
-              <Box component="a" href="https://dairia-avocats.com" target="_blank" rel="noopener"
+              <Box component="a" href="https://dairia-avocats.com" target="_blank" rel="noopener noreferrer"
                 sx={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, textDecoration: 'none', '&:hover': { color: C.orange } }}>
                 dairia-avocats.com
               </Box>
-              <Box component="a" href="https://sofiane-coly.vercel.app" target="_blank" rel="noopener"
+              <Box component="a" href="https://sofiane-coly.vercel.app" target="_blank" rel="noopener noreferrer"
                 sx={{ color: 'rgba(255,255,255,0.5)', fontSize: 14, textDecoration: 'none', '&:hover': { color: C.orange } }}>
                 sofiane-coly.vercel.app
               </Box>
